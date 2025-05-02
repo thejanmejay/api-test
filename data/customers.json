@@ -1,0 +1,157 @@
+{
+  "customers": [
+    {
+      "customerId": 101,
+      "name": "Rahul Mehta",
+      "email": "rahul.mehta@example.com",
+      "phone": "+91-9876543210",
+      "isActive": true,
+      "gender": "male",
+      "dob": "1990-05-15",
+      "address": {
+        "street": "23 Nehru Street",
+        "city": "Delhi",
+        "state": "Delhi",
+        "postalCode": "110001",
+        "country": "India"
+      },
+      "createdAt": "2023-08-10T10:00:00Z"
+    },
+    {
+      "customerId": 102,
+      "name": "Pooja Sharma",
+      "email": "pooja.sharma@example.com",
+      "phone": "+91-9123456789",
+      "isActive": false,
+      "gender": "female",
+      "dob": "1988-11-22",
+      "address": {
+        "street": "5 MG Road",
+        "city": "Pune",
+        "state": "Maharashtra",
+        "postalCode": "411001",
+        "country": "India"
+      },
+      "createdAt": "2022-06-12T08:45:00Z"
+    },
+    {
+      "customerId": 103,
+      "name": "Amit Joshi",
+      "email": "amit.joshi@example.com",
+      "phone": "+91-9988776655",
+      "isActive": true,
+      "gender": "male",
+      "dob": "1995-03-28",
+      "address": {
+        "street": "78 Residency Road",
+        "city": "Bangalore",
+        "state": "Karnataka",
+        "postalCode": "560001",
+        "country": "India"
+      },
+      "createdAt": "2024-01-05T14:30:00Z"
+    },
+    {
+      "customerId": 104,
+      "name": "Sneha Verma",
+      "email": "sneha.verma@example.com",
+      "phone": "+91-7766554433",
+      "isActive": true,
+      "gender": "female",
+      "dob": "1992-07-19",
+      "address": {
+        "street": "12 Ashok Nagar",
+        "city": "Lucknow",
+        "state": "Uttar Pradesh",
+        "postalCode": "226001",
+        "country": "India"
+      },
+      "createdAt": "2023-03-18T11:15:00Z"
+    },
+    {
+      "customerId": 105,
+      "name": "Karan Kapoor",
+      "email": "karan.kapoor@example.com",
+      "phone": "+91-9090909090",
+      "isActive": false,
+      "gender": "male",
+      "dob": "1985-12-05",
+      "address": {
+        "street": "45 Green Park",
+        "city": "Chandigarh",
+        "state": "Chandigarh",
+        "postalCode": "160036",
+        "country": "India"
+      },
+      "createdAt": "2021-11-30T09:00:00Z"
+    },
+    {
+      "customerId": 100,
+      "name": "Raman Singh",
+      "email": "raman@gmail.com",
+      "phone": "+91-6262173362",
+      "isActive": true,
+      "gender": "male",
+      "dob": "2002-12-05",
+      "address": {
+        "street": "45 Green Park",
+        "city": "Greater Noida",
+        "state": "Uttar Pradesh",
+        "postalCode": "201310",
+        "country": "India"
+      },
+      "createdAt": "2021-11-30T09:00:00Z"
+    },
+    {
+      "customerId": 99,
+      "name": "Rajat",
+      "email": "raman@gmail.com",
+      "phone": "+91-6262173362",
+      "isActive": true,
+      "gender": "male",
+      "dob": "2002-12-05",
+      "address": {
+        "street": "45 Green Park",
+        "city": "Greater Noida",
+        "state": "Uttar Pradesh",
+        "postalCode": "201310",
+        "country": "India"
+      },
+      "createdAt": "2021-11-30T09:00:00Z"
+    },
+    {
+      "customerId": 106,
+      "name": "R rajat",
+      "email": "raman@gmail.com",
+      "phone": "+91-6262173362",
+      "isActive": true,
+      "gender": "male",
+      "dob": "2002-12-05",
+      "address": {
+        "street": "45 Green Park",
+        "city": "Greater Noida",
+        "state": "Uttar Pradesh",
+        "postalCode": "201310",
+        "country": "India"
+      },
+      "createdAt": "2021-11-30T09:00:00Z"
+    },
+    {
+      "customerId": 107,
+      "name": "John Doe",
+      "email": "john.doe@example.com",
+      "phone": "+91-1234567890",
+      "isActive": true,
+      "gender": "male",
+      "dob": "1990-01-01",
+      "address": {
+        "street": "10 Test Street",
+        "city": "Test City",
+        "state": "Test State",
+        "postalCode": "123456",
+        "country": "Test Country"
+      },
+      "createdAt": "2025-05-02T19:30:00.877Z"
+    }
+  ]
+}

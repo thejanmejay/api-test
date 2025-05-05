@@ -1,33 +1,72 @@
+const apiKey = '12345'; // Declare your API key
 const userList = document.getElementById('user-list');
 
-fetch('http://localhost:3000/customers', {
-  method: 'GET',
-  headers: {
-    'x-api-key': '12345' // Pass the API key as a header
+async function fetchCustomers() {
+  try {
+    const res = await fetch(`${baseUrl}/customers`);
+    if (!res.ok) {
+      throw new Error('Failed to fetch customers');
+    }
+    const data = await res.json();
+    display(data);
+  } catch (error) {
+    console.error('Error fetching customers:', error);
+    alert('Error fetching customers. Check the console for details.');
   }
-})
-  .then(res => res.json())
-  .then(data => {
-    const users = data.customers; // Adjust to match your JSON structure
-    users.forEach(user => {
-      const div = document.createElement('div');
-      div.className = 'user';
-      div.innerHTML = `
-        <p>CustomerId: ${user.customerId}</p>
-        <h3>${user.name}</h3>
-        <p>Email: ${user.email}</p>
-        <p>City: ${user.address.city}</p>
-        <p>Phone: ${user.phone}</p>
-        <p>Status: ${user.isActive ? 'Active' : 'Inactive'}</p>
-        <p>Gender: ${user.gender}</p>
-        <p>DOB: ${user.dob}</p>
-        <p>Zip code: ${user.address.postalCode}</p>
-        <p>Country: ${user.address.country}</p>
-      `;
-      userList.appendChild(div);
+}
+
+
+async function getCustomerById() {
+  const id = document.getElementById('customerId').value;
+  
+  // Check if the ID is valid (numeric and non-empty)
+  if (!id || isNaN(id)) {
+    alert('Please enter a valid ID');
+    return;
+  }
+  
+  try {
+    // Fetch customer data from API using the provided ID
+    const res = await fetch(`${baseUrl}/customers/${id}`);
+    
+    // Check if the response is not ok (status code 2xx)
+    if (!res.ok) throw new Error('Customer not found');
+    
+    const data = await res.json(); // Parse the response JSON
+    
+    console.log('Customer data:', data);  // Debugging log to see the response
+    
+    display(data); // Call the display function to show the data on the UI
+  } catch (error) {
+    console.error('Error:', error);  // Log the error to the console for debugging
+    alert('Customer not found');
+  }
+}
+
+
+async function addCustomer() {
+  const id = parseInt(document.getElementById('newId').value);
+  const name = document.getElementById('newName').value;
+  const email = document.getElementById('newEmail').value;
+
+  const customer = { customerId: id, name, email };
+  try {
+    const res = await fetch(`${baseUrl}/customers`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-api-key': apiKey
+      },
+      body: JSON.stringify(customer)
     });
-  })
-  .catch(err => {
-    userList.innerHTML = `<p>Failed to load data 😢</p>`;
-    console.error("Fetch error:", err);
-  });
+    const data = await res.json();
+    if (!res.ok) {
+      throw new Error('Failed to add customer');
+    }
+    display(data);
+  } catch (error) {
+    console.error('Error adding customer:', error);
+    alert('Error adding customer. Check the console for details.');
+  }
+}
+

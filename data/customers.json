@@ -194,6 +194,20 @@
       "isActive": true,
       "gender": "Male",
       "dob": "1999-09-12"
+    },
+    {
+      "customerId": 111,
+      "name": "Ankita",
+      "email": "ankita@Gmail.com",
+      "address": {
+        "city": "Noida",
+        "postalCode": "129029",
+        "country": "Inida"
+      },
+      "phone": "3892102993",
+      "isActive": true,
+      "gender": "Female",
+      "dob": "1998-12-31"
     }
   ]
 }

@@ -61,7 +61,7 @@ button {
 }
 
 button:hover {
-    background-color: #45a049; /* Slightly darker green on hover */
+    background-color: #2c682f; /* Slightly darker green on hover */
 }
 
 input, select {

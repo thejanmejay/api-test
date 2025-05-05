@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>Customer Management</title>
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
   <div class="container">
     <div class="form-section">
@@ -18,28 +20,25 @@
       <h2>Add Customer</h2>
       <input type="number" id="newId" placeholder="ID">
       <input type="text" id="newName" placeholder="Name">
-      <input type="email" id="newEmail" placeholder="Email"><br><br>
-
+      <input type="email" id="newEmail" placeholder="Email">
       <input type="text" id="city" placeholder="City">
       <input type="text" id="postalCode" placeholder="Zip Code">
-      <input type="text" id="country" placeholder="Country"><br><br>
-
+      <input type="text" id="country" placeholder="Country">
       <input type="text" id="newPhone" placeholder="Phone">
-      <input type="date" id="dob" placeholder="Date of Birth">
+      <label for="dob">Date of Birth:</label>
+      <input type="date" id="dob" name="dob" max="">
       <select id="gender">
         <option value="">Select Gender</option>
         <option value="Male">Male</option>
         <option value="Female">Female</option>
         <option value="Other">Other</option>
-      </select><br><br>
-
-      <label><input type="checkbox" id="isActive"> Is Active</label><br><br>
-
+      </select>
+      <label><input type="checkbox" id="isActive"> Is Active</label>
       <button onclick="addCustomer()">Add</button>
     </div>
-
-    <div id="user-list" class="results-section">
-      <!-- Customer results will appear here -->
+    <div class="results-section">
+      <h2>Results</h2>
+      <div id="user-list"></div>
     </div>
   </div>
 
@@ -47,10 +46,11 @@
     const baseUrl = 'http://localhost:5000';
     const apiKey = '12345';
     const userList = document.getElementById('user-list');
-
+    // Set today's date as the maximum allowed date
+    const today = new Date().toISOString().split("T")[0];
+    document.getElementById("dob").setAttribute("max", today);
     function display(data) {
       userList.innerHTML = '';
-
       if (Array.isArray(data)) {
         data.forEach(user => {
           userList.innerHTML += `
@@ -117,9 +117,8 @@
         dob: document.getElementById('dob').value
       };
 
-      // Basic validation
       if (!customer.customerId || !customer.name || !customer.email || !customer.phone || !customer.gender || !customer.dob ||
-          !customer.address.city || !customer.address.postalCode || !customer.address.country) {
+        !customer.address.city || !customer.address.postalCode || !customer.address.country) {
         alert('Please fill all fields correctly.');
         return;
       }
@@ -145,4 +144,5 @@
     }
   </script>
 </body>
+
 </html>

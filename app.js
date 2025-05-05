@@ -3,21 +3,23 @@ const express = require('express');
 const fs = require('fs').promises;
 const cors = require('cors');
 const Joi = require('joi');
+
 const app = express();
 const PORT = process.env.PORT || 5000;
 const API_KEY = process.env.API_KEY;
+
 app.use(express.json()); // for parsing application/json
 
 // CORS setup
 app.use(cors({
-  origin: 'http://127.0.0.1:5500', // This allows requests from your local frontend
-  methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'], // Allowed methods
-  allowedHeaders: ['Content-Type', 'x-api-key'], // Allowed headers
-  preflightContinue: false, // Ensure OPTIONS preflight request is handled
-  optionsSuccessStatus: 204 // Some legacy browsers choke on 204 responses
+  origin: 'http://127.0.0.1:5500',
+  methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'x-api-key'],
+  preflightContinue: false,
+  optionsSuccessStatus: 204
 }));
 
-// Joi Schemas for validation
+// Joi Schema for customer validation
 const customerSchema = Joi.object({
   customerId: Joi.number().required(),
   name: Joi.string().required(),
@@ -30,10 +32,10 @@ const customerSchema = Joi.object({
   phone: Joi.string().required(),
   isActive: Joi.boolean().required(),
   gender: Joi.string().valid('Male', 'Female', 'Other').required(),
-  dob: Joi.string().required()  // Better: use Joi.date().iso() if format is guaranteed
+  dob: Joi.string().required()
 });
 
-// Middleware for API Key Authentication
+// API Key Authentication middleware
 const apiKeyAuth = (req, res, next) => {
   const apiKey = req.headers['x-api-key'];
   if (apiKey === API_KEY) {
@@ -66,64 +68,30 @@ const saveCustomerData = async (data, res) => {
   }
 };
 
-// Routes
-
-// Get all customers
+// GET all customers
 app.get('/customers', async (req, res) => {
-  const customerData = await loadCustomerData();
-  res.json(customerData.customers);
+  const data = await loadCustomerData();
+  res.json(data.customers);
 });
 
-// Get customer by ID
+// GET customer by ID
 app.get('/customers/:id', async (req, res) => {
   const id = parseInt(req.params.id);
-  if (isNaN(id)) return res.status(400).json({ message: 'Invalid customer ID' });
-
-  const customerData = await loadCustomerData();
-  const customer = customerData.customers.find(c => c.customerId === id);
-
-  if (customer) {
-    res.json(customer); // Send the customer data if found
-  } else {
-    res.status(404).json({ message: 'Customer not found' }); // Send 404 if not found
+  if (isNaN(id)) {
+    return res.status(400).json({ message: 'Invalid ID' });
   }
+
+  const data = await loadCustomerData();
+  const customer = data.customers.find(c => c.customerId === id);
+
+  if (!customer) {
+    return res.status(404).json({ message: 'Customer not found' });
+  }
+
+  res.json(customer);
 });
 
-// Example customer data loading (adjust to your file or DB)
-const loadCustomers = async () => {
-  const data = await fs.readFile('customers.json', 'utf-8');
-  return JSON.parse(data);
-};
-
-// Correct route
-app.get('/customers/search', async (req, res) => {
-  try {
-    const term = req.query.term?.toLowerCase();
-
-    if (!term) {
-      return res.status(400).json({ message: 'Search term is required' });
-    }
-
-    const customers = await loadCustomers();
-
-    const results = customers.filter(c =>
-      c.name.toLowerCase().includes(term) ||
-      c.email.toLowerCase().includes(term)
-    );
-
-    if (results.length === 0) {
-      return res.status(404).json({ message: 'No customers found' });
-    }
-
-    res.json(results);
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ message: 'Server error' });
-  }
-});
-
-
-// Create a new customer
+// POST create new customer
 app.post('/customers', apiKeyAuth, async (req, res) => {
   const newCustomer = req.body;
   const { error } = customerSchema.validate(newCustomer);
@@ -137,28 +105,6 @@ app.post('/customers', apiKeyAuth, async (req, res) => {
   await saveCustomerData(customerData, res);
   res.status(201).json({ message: 'Customer created successfully', customer: newCustomer });
 });
-
-// Search customers by name or email
-app.get('/customers/search', async (req, res) => {
-  const searchTerm = req.query.term;
-  if (!searchTerm) {
-    return res.status(400).json({ message: 'Search term is required' });
-  }
-
-  const customerData = await loadCustomerData();
-  const filteredCustomers = customerData.customers.filter(customer => {
-    return customer.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-           customer.email.toLowerCase().includes(searchTerm.toLowerCase());
-  });
-
-  if (filteredCustomers.length > 0) {
-    res.json(filteredCustomers);
-  } else {
-    res.status(404).json({ message: 'No customers found matching the search term' });
-  }
-});
-
-
 
 // 404 Handler
 app.use((req, res) => {

@@ -19,11 +19,11 @@ body {
     max-width: 1200px; /* Set a max-width for the whole container */
     padding: 40px;
     box-sizing: border-box;
+    gap: 30px; /* Space between form and results section */
 }
 
 .form-section {
     width: 45%; /* Form section takes 45% width */
-    margin-right: 20px; /* Space between form and results */
     padding: 20px;
     background-color: #ffffff;
     border-radius: 8px;
@@ -84,14 +84,33 @@ input:focus, select:focus {
     border-color: #3498db; /* Blue border on focus */
     box-shadow: 0 0 5px rgba(52, 152, 219, 0.5);
 }
-
-#user-list div {
-    border-bottom: 1px solid #eee;
-    padding: 10px 0;
+#gender{
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    background-color: #f9f9f9; /* Light gray background for inputs */
+    font-size: 1em;
 }
 
-#user-list div:last-child {
-    border-bottom: none;
+#user-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+#user-list div {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    box-sizing: border-box;
+}
+
+#user-list div strong {
+    color: #3498db; /* Soft blue for field labels */
 }
 
 hr {
@@ -99,3 +118,73 @@ hr {
     border: 0;
     border-top: 1px solid #e0e0e0; /* Light gray divider */
 }
+
+table {
+    width: 200%;
+    border-radius: 8px;
+    overflow: hidden; /* Ensure rounded corners are visible */
+    border-collapse: collapse;
+    margin-top: 40px;
+}
+.results-section{
+    overflow-y: auto; /* Allow scrolling if content overflows */
+    max-height: 80vh; /* Limit height of results section */
+    padding: 20px;
+    background-color: #ffffff;
+}
+table, th, td {
+    border: 1px solid #ddd;
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+    font-size: 1em;
+}
+
+th {
+    background-color: #3498db; /* Soft blue background for headers */
+    color: white;
+}
+
+td {
+    background-color: #f9f9f9;
+}
+
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .form-section, .results-section {
+        width: 80%; /* Adjust width for smaller screens */
+    }
+}
+.customer-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    table-layout: auto; /* Let columns adjust to content */
+  }
+  
+  .customer-table th,
+  .customer-table td {
+    border: 1px solid #ccc;
+    padding: 8px;
+    text-align: left;
+  }
+  
+  .customer-table th {
+    background-color:  #4CAF50; /* Soft green background for headers */
+    color: white;
+  }
+  .customer-table th, .customer-table td {
+    
+    white-space: normal; /* Allow wrapping */
+    max-width: 150px;     /* Limit width per column if needed */
+    overflow-wrap: break-word;
+}
+
+
+  

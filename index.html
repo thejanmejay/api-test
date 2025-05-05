@@ -3,23 +3,45 @@
 <head>
   <meta charset="UTF-8">
   <title>Customer Management</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h2>Get All Customers</h2>
-  <button onclick="fetchCustomers()">Get All</button>
+  <div class="container">
+    <div class="form-section">
+      <h2>Get All Customers</h2>
+      <button onclick="fetchCustomers()">Get All</button>
 
-  <h2>Get Customer by ID</h2>
-  <input type="number" id="customerId" placeholder="Enter ID">
-  <button onclick="getCustomerById()">Get by ID</button>
+      <h2>Get Customer by ID</h2>
+      <input type="number" id="customerId" placeholder="Enter ID">
+      <button onclick="getCustomerById()">Get by ID</button>
 
-  <h2>Add Customer</h2>
-  <input type="number" id="newId" placeholder="ID">
-  <input type="text" id="newName" placeholder="Name">
-  <input type="email" id="newEmail" placeholder="Email">
-  <button onclick="addCustomer()">Add</button>
+      <h2>Add Customer</h2>
+      <input type="number" id="newId" placeholder="ID">
+      <input type="text" id="newName" placeholder="Name">
+      <input type="email" id="newEmail" placeholder="Email"><br><br>
 
-  <hr>
-  <div id="user-list"></div>
+      <input type="text" id="city" placeholder="City">
+      <input type="text" id="postalCode" placeholder="Zip Code">
+      <input type="text" id="country" placeholder="Country"><br><br>
+
+      <input type="text" id="newPhone" placeholder="Phone">
+      <input type="date" id="dob" placeholder="Date of Birth">
+      <select id="gender">
+        <option value="">Select Gender</option>
+        <option value="Male">Male</option>
+        <option value="Female">Female</option>
+        <option value="Other">Other</option>
+      </select><br><br>
+
+      <label><input type="checkbox" id="isActive"> Is Active</label><br><br>
+
+      <button onclick="addCustomer()">Add</button>
+    </div>
+
+    <div id="user-list" class="results-section">
+      <!-- Customer results will appear here -->
+    </div>
+  </div>
 
   <script>
     const baseUrl = 'http://localhost:5000';
@@ -80,16 +102,28 @@
     }
 
     async function addCustomer() {
-      const id = parseInt(document.getElementById('newId').value);
-      const name = document.getElementById('newName').value;
-      const email = document.getElementById('newEmail').value;
+      const customer = {
+        customerId: parseInt(document.getElementById('newId').value),
+        name: document.getElementById('newName').value,
+        email: document.getElementById('newEmail').value,
+        address: {
+          city: document.getElementById('city').value,
+          postalCode: document.getElementById('postalCode').value,
+          country: document.getElementById('country').value
+        },
+        phone: document.getElementById('newPhone').value,
+        isActive: document.getElementById('isActive').checked,
+        gender: document.getElementById('gender').value,
+        dob: document.getElementById('dob').value
+      };
 
-      if (!id || !name || !email) {
-        alert('Please fill all fields');
+      // Basic validation
+      if (!customer.customerId || !customer.name || !customer.email || !customer.phone || !customer.gender || !customer.dob ||
+          !customer.address.city || !customer.address.postalCode || !customer.address.country) {
+        alert('Please fill all fields correctly.');
         return;
       }
 
-      const customer = { customerId: id, name, email };
       try {
         const res = await fetch(`${baseUrl}/customers`, {
           method: 'POST',
@@ -99,9 +133,11 @@
           },
           body: JSON.stringify(customer)
         });
+
         if (!res.ok) throw new Error('Failed to add customer');
         const data = await res.json();
-        display(data);
+        alert(data.message || 'Customer added');
+        display(data.customer);
       } catch (error) {
         console.error('Error adding customer:', error);
         alert('Error adding customer');

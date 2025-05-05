@@ -1,0 +1,101 @@
+/* styles.css */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f8ff; /* Light blue background */
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* Ensure content is at the top */
+    height: 100vh;
+    background: linear-gradient(135deg, #f0f8ff, #e6f7ff); /* Soft gradient */
+}
+
+.container {
+    display: flex;
+    justify-content: space-between; /* Space between form and results */
+    width: 90%; /* Limit the width */
+    max-width: 1200px; /* Set a max-width for the whole container */
+    padding: 40px;
+    box-sizing: border-box;
+}
+
+.form-section {
+    width: 45%; /* Form section takes 45% width */
+    margin-right: 20px; /* Space between form and results */
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.results-section {
+    width: 45%; /* Results section takes 45% width */
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    max-height: 80vh;
+    overflow-y: auto; /* Allow scrolling if content overflows */
+}
+
+h2 {
+    color: #3498db; /* Soft blue for headers */
+    margin-bottom: 20px;
+    text-align: center;
+    font-size: 1.5em;
+}
+
+button {
+    padding: 10px 15px;
+    margin: 10px 0;
+    cursor: pointer;
+    background-color: #4CAF50; /* Soft green button */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    width: 100%; /* Make button full-width */
+    transition: background-color 0.3s;
+    font-size: 1.1em;
+}
+
+button:hover {
+    background-color: #45a049; /* Slightly darker green on hover */
+}
+
+input, select {
+    padding: 12px;
+    margin: 10px 0;
+    width: 100%; /* Full width for inputs */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    background-color: #f9f9f9; /* Light gray background for inputs */
+    font-size: 1em;
+}
+
+input[type="checkbox"] {
+    width: auto;
+    margin-right: 5px;
+}
+
+input:focus, select:focus {
+    border-color: #3498db; /* Blue border on focus */
+    box-shadow: 0 0 5px rgba(52, 152, 219, 0.5);
+}
+
+#user-list div {
+    border-bottom: 1px solid #eee;
+    padding: 10px 0;
+}
+
+#user-list div:last-child {
+    border-bottom: none;
+}
+
+hr {
+    margin: 20px 0;
+    border: 0;
+    border-top: 1px solid #e0e0e0; /* Light gray divider */
+}

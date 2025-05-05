@@ -152,6 +152,48 @@
         "country": "Test Country"
       },
       "createdAt": "2025-05-02T19:30:00.877Z"
+    },
+    {
+      "customerId": 108,
+      "name": "jay",
+      "email": "jay@gmail.com",
+      "address": {
+        "city": "Noida",
+        "postalCode": "201310",
+        "country": "India"
+      },
+      "phone": "6262173362",
+      "isActive": true,
+      "gender": "Male",
+      "dob": "2002-08-13"
+    },
+    {
+      "customerId": 109,
+      "name": "Test",
+      "email": "test@gmail.com",
+      "address": {
+        "city": "201310",
+        "postalCode": "820190",
+        "country": "India"
+      },
+      "phone": "8923147690",
+      "isActive": true,
+      "gender": "Male",
+      "dob": "2000-09-12"
+    },
+    {
+      "customerId": 110,
+      "name": "ttecd",
+      "email": "ja@gmail.com",
+      "address": {
+        "city": "Noida",
+        "postalCode": "2901314",
+        "country": "India"
+      },
+      "phone": "0987654321",
+      "isActive": true,
+      "gender": "Male",
+      "dob": "1999-09-12"
     }
   ]
 }

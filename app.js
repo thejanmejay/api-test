@@ -91,16 +91,14 @@ app.get('/customers/:id', async (req, res) => {
 
   const customerData = await loadCustomerData();
   const customer = customerData.customers.find(c => c.customerId === id);
-  const ids = customerData.customers.map(c => c.customerId);
-  res.json(ids);
-
 
   if (customer) {
-    res.json(customer);
+    res.json(customer); // Send the customer data if found
   } else {
-    res.status(404).json({ message: 'Customer not found' });
+    res.status(404).json({ message: 'Customer not found' }); // Send 404 if not found
   }
 });
+
 
 app.post('/customers', apiKeyAuth, async (req, res) => {
   const newCustomer = req.body;
